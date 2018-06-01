@@ -2,17 +2,22 @@ using PureMVC.Interfaces;
 using PureMVC.Patterns;
 using UnityEngine;
 
-public class StartupCommand : SimpleCommand
+public class StartupCommand : MacroCommand
 {
+
+    override protected void InitializeMacroCommand()
+    {
+        AddSubCommand(typeof(ModelPrepCommand));
+    }
     override public void Execute(INotification notification)
     {
-        Debug.Log("StartupCommand >> Execute >> " + notification.Name);
+        base.Execute(notification);
 
+        Debug.Log("StartupCommand >> Execute >> " + notification.Name);
         GameObject managerObj = GameObject.Find("Manager");
         if (managerObj)
         {
-            managerObj.AddComponent<GameManager>();
-
+            managerObj.AddComponent<LuaManager>();
             SendNotification(NotificationDefine.LOGIN);
         }
         else

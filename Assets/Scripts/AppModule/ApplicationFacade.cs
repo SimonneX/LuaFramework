@@ -29,12 +29,6 @@ public class ApplicationFacade : Facade
         RegisterCommand(NotificationDefine.STARTUP, typeof(StartupCommand));
     }
 
-    override protected void InitializeView()
-    {
-        base.InitializeView();
-        RegisterMediator(new LoginMeditor());
-    }
-
     public void StartUp()
     {
         SendNotification(NotificationDefine.STARTUP);

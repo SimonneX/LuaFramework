@@ -6,7 +6,7 @@ public class GameManager : Manager
 {
     void Start()
     {
-
+        ApplicationFacade.Instance.StartUp();
     }
 
     void Update()

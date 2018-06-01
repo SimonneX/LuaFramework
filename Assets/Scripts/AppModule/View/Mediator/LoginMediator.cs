@@ -6,18 +6,43 @@ using PureMVC.Patterns;
 
 public class LoginMeditor : Mediator
 {
+    public LoginMeditor(ViewComponent viewComponent) : base("LoginMeditor", viewComponent)
+    {
+
+    }
+
+    private LoginView loginView
+    {
+        get
+        {
+            return m_viewComponent as LoginView;
+        }
+    }
+
 
     override public IList<string> ListNotificationInterests()
     {
-        List<string> notifications = new List<string>();
-
-        notifications.Add(NotificationDefine.LOGIN);
-
-        return notifications;
+        return new List<string>
+        {
+            NotificationDefine.LOGIN,
+        };
     }
 
     override public void HandleNotification(INotification notification)
     {
         Debug.Log("LoginMeditor >> HandleNotification >> " + notification.Name);
+        switch (notification.Name)
+        {
+            case NotificationDefine.LOGIN:
+                InitLoginView();
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void InitLoginView()
+    {
+        loginView.ShowLoginView();
     }
 }
