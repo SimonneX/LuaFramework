@@ -8,7 +8,7 @@ public class LoginMeditor : Mediator
 {
     public LoginMeditor(ViewComponent viewComponent) : base("LoginMeditor", viewComponent)
     {
-
+        loginView.AddEventListener(LoginView.LOGIN_CLICK, OnLoginEvent);
     }
 
     private LoginView loginView
@@ -30,7 +30,7 @@ public class LoginMeditor : Mediator
 
     override public void HandleNotification(INotification notification)
     {
-        Debug.Log("LoginMeditor >> HandleNotification >> " + notification.Name);
+        // Debug.Log("LoginMeditor >> HandleNotification >> " + notification.Name);
         switch (notification.Name)
         {
             case NotificationDefine.LOGIN:
@@ -41,8 +41,15 @@ public class LoginMeditor : Mediator
         }
     }
 
+
+    protected void OnLoginEvent(Object obj)
+    {
+        LoginDataObject data = obj as LoginDataObject;
+        Debug.Log("Login User:" + data.strUserName);
+    }
+
     protected void InitLoginView()
     {
-        loginView.ShowLoginView();
+
     }
 }
