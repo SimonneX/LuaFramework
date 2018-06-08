@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    void Awake()
+    // private static Manager s_instance;
+    // public static Manager Instance
+    // {
+    //     get
+    //     {
+    //         return s_instance;
+    //     }
+    // }
+    protected virtual void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        // s_instance = this;
     }
 
     // Use this for initialization

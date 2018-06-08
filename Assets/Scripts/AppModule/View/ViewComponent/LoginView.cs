@@ -4,29 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using PureMVC.Patterns;
 
-public class LoginDataObject : Object
-{
-    public LoginDataObject(string username)
-    {
-        strUserName = username;
-    }
-    public string strUserName;
-}
 public class LoginView : ViewComponent
 {
     public const string LOGIN_CLICK = "LOGIN_CLICK";
     public Button loginButton;
     public InputField userNameInput;
+    public InputField passwordInput;
 
     override protected Mediator GetMediator()
     {
         return new LoginMeditor(this);
-    }
-
-    public void OnClickButton()
-    {
-        LoginDataObject obj = new LoginDataObject(userNameInput.text);
-        NotifyEvent(LOGIN_CLICK, obj);
     }
 
     // Use this for initialization
@@ -39,5 +26,10 @@ public class LoginView : ViewComponent
     void Update()
     {
 
+    }
+    protected void OnClickButton()
+    {
+        LoginData obj = new LoginData(userNameInput.text, passwordInput.text);
+        NotifyEvent(LOGIN_CLICK, obj);
     }
 }

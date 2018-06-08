@@ -8,7 +8,7 @@ public class LoginMeditor : Mediator
 {
     public LoginMeditor(ViewComponent viewComponent) : base("LoginMeditor", viewComponent)
     {
-        loginView.AddEventListener(LoginView.LOGIN_CLICK, OnLoginEvent);
+
     }
 
     private LoginView loginView
@@ -19,22 +19,33 @@ public class LoginMeditor : Mediator
         }
     }
 
+    public override void OnRegister()
+    {
+        loginView.AddEventListener(LoginView.LOGIN_CLICK, OnLoginEvent);
+    }
+    public override void OnRemove()
+    {
+
+    }
 
     override public IList<string> ListNotificationInterests()
     {
         return new List<string>
         {
-            NotificationDefine.LOGIN,
+            NotificationDefine.LOGIN_SUCCESS,
+            NotificationDefine.LOGIN_FAIL,
         };
     }
 
     override public void HandleNotification(INotification notification)
     {
-        // Debug.Log("LoginMeditor >> HandleNotification >> " + notification.Name);
         switch (notification.Name)
         {
-            case NotificationDefine.LOGIN:
-                InitLoginView();
+            case NotificationDefine.LOGIN_SUCCESS:
+                ShowLoginSuccess();
+                break;
+            case NotificationDefine.LOGIN_FAIL:
+                ShowLoginFail();
                 break;
             default:
                 break;
@@ -44,12 +55,17 @@ public class LoginMeditor : Mediator
 
     protected void OnLoginEvent(Object obj)
     {
-        LoginDataObject data = obj as LoginDataObject;
-        Debug.Log("Login User:" + data.strUserName);
+        LoginData data = obj as LoginData;
+        SendNotification(NotificationDefine.LOGIN, obj);
     }
 
-    protected void InitLoginView()
+    protected void ShowLoginSuccess()
     {
+        SendNotification(NotificationDefine.SHOW_ALERT_VIEW, "Login Success");
+    }
 
+    protected void ShowLoginFail()
+    {
+        SendNotification(NotificationDefine.SHOW_ALERT_VIEW, "Login Fail");
     }
 }

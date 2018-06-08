@@ -7,5 +7,6 @@ public class ModelPrepCommand : SimpleCommand
     override public void Execute(INotification notification)
     {
         Debug.Log("ModelPrepCommand >> Execute >> " + notification.Name);
+        ApplicationFacade.Instance.RegisterProxy(new UserProxy());
     }
 }

@@ -1,6 +1,7 @@
 using PureMVC.Interfaces;
 using PureMVC.Patterns;
 using UnityEngine;
+using DG.Tweening;
 
 public class StartupCommand : MacroCommand
 {
@@ -13,16 +14,19 @@ public class StartupCommand : MacroCommand
     {
         base.Execute(notification);
 
-        Debug.Log("StartupCommand >> Execute >> " + notification.Name);
+        // Manager
         GameObject managerObj = GameObject.Find("Manager");
         if (managerObj)
         {
+            managerObj.AddComponent<ResourcesManager>();
             managerObj.AddComponent<LuaManager>();
-            SendNotification(NotificationDefine.LOGIN);
         }
         else
         {
             Debug.LogWarning("StartupCommand >> Execute >> GameObject: Manager not found");
         }
+
+        // DOTween
+        DOTween.Init();
     }
 }

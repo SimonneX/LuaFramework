@@ -16,6 +16,11 @@ public class ViewComponent : MonoBehaviour
         m_eventList.Add(eventName, del);
     }
 
+    public void RemoveEventListener(string eventName, EventDelegate del)
+    {
+        m_eventList.Remove(eventName);
+    }
+
     protected void NotifyEvent(string eventName, Object dataObj = null)
     {
         foreach (KeyValuePair<string, EventDelegate> kvp in m_eventList)

@@ -27,6 +27,8 @@ public class ApplicationFacade : Facade
     {
         base.InitializeController();
         RegisterCommand(NotificationDefine.STARTUP, typeof(StartupCommand));
+        RegisterCommand(NotificationDefine.LOGIN, typeof(LoginCommand));
+        RegisterCommand(NotificationDefine.SHOW_ALERT_VIEW, typeof(ShowAlertCommand));
     }
 
     public void StartUp()
