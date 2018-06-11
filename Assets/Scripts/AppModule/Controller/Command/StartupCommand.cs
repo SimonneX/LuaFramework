@@ -14,11 +14,13 @@ public class StartupCommand : MacroCommand
     {
         base.Execute(notification);
 
+        // DOTween
+        DOTween.Init();
+
         // Manager
         GameObject managerObj = GameObject.Find("Manager");
         if (managerObj)
         {
-            managerObj.AddComponent<ResourcesManager>();
             managerObj.AddComponent<LuaManager>();
         }
         else
@@ -26,7 +28,5 @@ public class StartupCommand : MacroCommand
             Debug.LogWarning("StartupCommand >> Execute >> GameObject: Manager not found");
         }
 
-        // DOTween
-        DOTween.Init();
     }
 }
