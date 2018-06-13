@@ -7,6 +7,7 @@ public class NotificationDefine
     public const string STARTUP = "STARTUP";
 
     // login
+    public const string SHOW_LOGIN_SCENE = "SHOW_LOGIN_SCENE";
     public const string LOGIN = "LOGIN";
     public const string LOGIN_SUCCESS = "LOGIN_SUCCESS";
     public const string LOGIN_FAIL = "LOGIN_FAIL";
