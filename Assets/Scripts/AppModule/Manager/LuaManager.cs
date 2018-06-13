@@ -5,6 +5,15 @@ using LuaInterface;
 
 public class LuaManager : Manager
 {
+
+    private static LuaManager s_instance;
+    public static LuaManager Instance
+    {
+        get
+        {
+            return s_instance;
+        }
+    }
     private LuaState m_luaState = null;
     private LuaResLoader m_luaResLoader = null;
     // Use this for initialization
@@ -27,6 +36,12 @@ public class LuaManager : Manager
         m_luaState.Dispose();
         m_luaState = null;
         Init();
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        s_instance = this;
     }
 
     void Start()

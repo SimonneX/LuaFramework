@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    private static Manager s_instance;
-    public static Manager Instance
+    protected virtual void SendNotification(string notificationName, object body = null)
     {
-        get
+        if (body == null)
         {
-            return s_instance;
+            ApplicationFacade.Instance.SendNotification(notificationName);
         }
+        else
+        {
+            ApplicationFacade.Instance.SendNotification(notificationName, body);
+        }
+
     }
 
     protected virtual void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        s_instance = this;
     }
 
     // Use this for initialization

@@ -3,13 +3,8 @@ using PureMVC.Patterns;
 using UnityEngine;
 using DG.Tweening;
 
-public class StartupCommand : MacroCommand
+public class StartupCommand : SimpleCommand
 {
-
-    override protected void InitializeMacroCommand()
-    {
-        AddSubCommand(typeof(ModelPrepCommand));
-    }
     override public void Execute(INotification notification)
     {
         base.Execute(notification);
@@ -22,6 +17,7 @@ public class StartupCommand : MacroCommand
         if (managerObj)
         {
             managerObj.AddComponent<LuaManager>();
+            managerObj.AddComponent<ResourcesManager>();
         }
         else
         {

@@ -6,11 +6,10 @@ public class NotificationDefine
 {
     public const string STARTUP = "STARTUP";
 
-    // login
-    public const string SHOW_LOGIN_SCENE = "SHOW_LOGIN_SCENE";
-    public const string LOGIN = "LOGIN";
-    public const string LOGIN_SUCCESS = "LOGIN_SUCCESS";
-    public const string LOGIN_FAIL = "LOGIN_FAIL";
+    // resources update
+    public const string RESOURCES_UPDATE = "RESOURCES_UPDATE";
+    public const string RESOURCES_UPDATE_PERCENT = "RESOURCES_UPDATE_PERCENT";
+    public const string RESOURCES_UPDATE_FINISH = "RESOURCES_UPDATE_FINISH";
 
     public const string SHOW_ALERT_VIEW = "SHOW_ALERT_VIEW";
 }
