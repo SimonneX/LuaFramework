@@ -29,6 +29,7 @@ public static class CustomSettings
         typeof(UnityEngine.QualitySettings),
         typeof(UnityEngine.GL),
         typeof(UnityEngine.Graphics),
+        typeof(UnityEngine.SceneManagement.SceneManager),
     };
 
     //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)
@@ -150,6 +151,8 @@ public static class CustomSettings
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),
         _GT(typeof(LuaProfiler)),
+
+        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

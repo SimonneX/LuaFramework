@@ -23,6 +23,7 @@ public class LuaManager : Manager
         m_luaResLoader = new LuaResLoader();
         m_luaState = new LuaState();
         m_luaState.Start();
+        LuaBinder.Bind(m_luaState);
 
         InitLuaPath();
         m_luaState.Require("app/main");

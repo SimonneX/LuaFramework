@@ -11,6 +11,9 @@ function main()
 	requireFiles()
 	print("===>> Main Start <<===")
 	print("DEBUG: " .. DEBUG)
+
+	local sceneMgr = UnityEngine.SceneManagement.SceneManager
+	sceneMgr.LoadScene("Login")
 end
 
 --场景切换通知
