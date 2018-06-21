@@ -23,9 +23,14 @@ public class LuaManager : Manager
         m_luaResLoader = new LuaResLoader();
         m_luaState = new LuaState();
         m_luaState.Start();
+
         LuaBinder.Bind(m_luaState);
 
         InitLuaPath();
+    }
+
+    public void StartMain()
+    {
         m_luaState.Require("app/main");
     }
 
@@ -37,6 +42,26 @@ public class LuaManager : Manager
         m_luaState.Dispose();
         m_luaState = null;
         Init();
+    }
+
+    public void PCallLuaFunction(string functionName, params object[] parms)
+    {
+        LuaFunction func = m_luaState.GetFunction(functionName);
+        if (func == null)
+            return;
+        func.BeginPCall();
+        for (int i = 0; i < parms.Length; ++i)
+        {
+            func.Push(parms[i]);
+        }
+        func.PCall();
+        func.EndPCall();
+        func.Dispose();
+    }
+
+    public LuaFunction GetLuaFunction(string functionName)
+    {
+        return m_luaState.GetFunction(functionName);
     }
 
     protected override void Awake()

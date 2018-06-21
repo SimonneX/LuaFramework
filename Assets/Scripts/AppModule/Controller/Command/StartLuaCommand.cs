@@ -9,5 +9,6 @@ public class StartLuaCommand : SimpleCommand
         base.Execute(notification);
 
         LuaManager.Instance.Init();
+        LuaManager.Instance.StartMain();
     }
 }

@@ -1,10 +1,18 @@
-﻿using PureMVC.Patterns;
+﻿using PureMVC.Interfaces;
+using PureMVC.Patterns;
+
 using UnityEngine;
+using System.Collections.Generic;
+using LuaInterface;
 
 public class ApplicationFacade : Facade
 {
-
     private static ApplicationFacade s_instance;
+
+    public void StartUp()
+    {
+        SendNotification(NotificationDefine.STARTUP);
+    }
 
     public static ApplicationFacade Instance
     {
@@ -23,9 +31,15 @@ public class ApplicationFacade : Facade
 
     }
 
+    override protected void InitializeFacade()
+    {
+        base.InitializeFacade();
+    }
+
     override protected void InitializeController()
     {
         base.InitializeController();
+
         RegisterCommand(NotificationDefine.STARTUP, typeof(StartupCommand));
         RegisterCommand(NotificationDefine.RESOURCES_UPDATE, typeof(ResourcesUpdateCommand));
         RegisterCommand(NotificationDefine.RESOURCES_UPDATE_FINISH, typeof(ResourcesUpdateFinishCommand));
@@ -33,8 +47,13 @@ public class ApplicationFacade : Facade
         RegisterCommand(NotificationDefine.SHOW_ALERT_VIEW, typeof(ShowAlertCommand));
     }
 
-    public void StartUp()
+    public void RegisterLuaCommand(string notificationName)
     {
-        SendNotification(NotificationDefine.STARTUP);
+        RegisterCommand(notificationName, typeof(LuaBridgeCommand));
+    }
+
+    public void RemoveLuaCommand(string notificationName)
+    {
+        RemoveCommand(notificationName);
     }
 }

@@ -11,6 +11,7 @@ public static class LuaBinder
 		L.BeginModule(null);
 		LuaInterface_DebuggerWrap.Register(L);
 		LuaProfilerWrap.Register(L);
+		ApplicationFacadeWrap.Register(L);
 		L.BeginModule("LuaInterface");
 		LuaInterface_LuaInjectionStationWrap.Register(L);
 		LuaInterface_InjectTypeWrap.Register(L);
@@ -76,6 +77,11 @@ public static class LuaBinder
 		L.BeginModule("AudioClip");
 		L.RegFunction("PCMReaderCallback", UnityEngine_AudioClip_PCMReaderCallback);
 		L.RegFunction("PCMSetPositionCallback", UnityEngine_AudioClip_PCMSetPositionCallback);
+		L.EndModule();
+		L.EndModule();
+		L.BeginModule("PureMVC");
+		L.BeginModule("Patterns");
+		PureMVC_Patterns_FacadeWrap.Register(L);
 		L.EndModule();
 		L.EndModule();
 		L.BeginModule("System");
