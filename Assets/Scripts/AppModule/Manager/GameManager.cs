@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Manager
 {
+    public bool enabledDebugView = false;
     private static GameManager s_instance;
     public static GameManager Instance
     {
@@ -21,10 +22,19 @@ public class GameManager : Manager
     void Start()
     {
         ApplicationFacade.Instance.StartUp();
+        ShowDebugView();
     }
 
     void Update()
     {
 
+    }
+
+    void ShowDebugView()
+    {
+        if (!enabledDebugView)
+            return;
+
+        Instantiate(Resources.Load("Prefabs/DebugViewCanvas"));
     }
 }
