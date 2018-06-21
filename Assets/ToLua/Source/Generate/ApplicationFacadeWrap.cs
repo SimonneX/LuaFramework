@@ -10,7 +10,6 @@ public class ApplicationFacadeWrap
 		L.RegFunction("StartUp", StartUp);
 		L.RegFunction("RegisterLuaCommand", RegisterLuaCommand);
 		L.RegFunction("RemoveLuaCommand", RemoveLuaCommand);
-		L.RegFunction("RegisterMedatior", RegisterMedatior);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Instance", get_Instance, null);
 		L.EndClass();
@@ -58,23 +57,6 @@ public class ApplicationFacadeWrap
 			ApplicationFacade obj = (ApplicationFacade)ToLua.CheckObject<ApplicationFacade>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.RemoveLuaCommand(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RegisterMedatior(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			ApplicationFacade obj = (ApplicationFacade)ToLua.CheckObject<ApplicationFacade>(L, 1);
-			string arg0 = ToLua.CheckString(L, 2);
-			obj.RegisterMedatior(arg0);
 			return 0;
 		}
 		catch (Exception e)
