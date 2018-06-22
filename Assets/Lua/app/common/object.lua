@@ -1,3 +1,9 @@
+--[[
+- object.lua
+- @description 
+- @MIT license
+- @author https://github.com/rxi/classic
+]]
 local Object = {}
 Object.__index = Object
 
