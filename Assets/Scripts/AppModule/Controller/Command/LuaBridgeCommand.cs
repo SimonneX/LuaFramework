@@ -8,6 +8,6 @@ public class LuaBridgeCommand : SimpleCommand
     override public void Execute(INotification notification)
     {
         base.Execute(notification);
-        LuaManager.Instance.PCallLuaFunction("CommandManager.ExecuteFunction", notification.Name, notification.Body);
+        LuaManager.Instance.PCallVoidLuaFunction("CommandManager.ExecuteFunction", notification.Name, notification.Body);
     }
 }

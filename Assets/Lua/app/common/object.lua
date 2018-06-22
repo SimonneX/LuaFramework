@@ -13,6 +13,9 @@ function Object:extend()
     end
     cls.__index = cls
     cls.super = self
+    cls.create = function()
+        return cls()
+    end
     setmetatable(cls, self)
     return cls
 end

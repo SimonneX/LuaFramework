@@ -1060,6 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674007890}
   - component: {fileID: 1858316752}
+  - component: {fileID: 1858316751}
   m_Layer: 5
   m_Name: LoginView
   m_TagString: Untagged
@@ -1067,6 +1068,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1858316751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858316750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93e6d6e0f0d348fe9063c150e5fbc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luaClassName: 
 --- !u!222 &1858316752
 CanvasRenderer:
   m_ObjectHideFlags: 0

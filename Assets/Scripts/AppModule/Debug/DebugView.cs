@@ -35,8 +35,13 @@ public class DebugView : MonoBehaviour
         debugPanel.active = showToggle.isOn;
     }
 
-    public void OnClickTest()
+    public void OnClickSendNotification()
     {
-        Debug.Log("test");
+        ApplicationFacade.Instance.SendNotification("TEST_COMMAND", 123);
+    }
+
+    public void OnClickCallLuaFunction()
+    {
+
     }
 }

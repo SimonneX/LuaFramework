@@ -44,7 +44,7 @@ public class LuaManager : Manager
         Init();
     }
 
-    public void PCallLuaFunction(string functionName, params object[] parms)
+    public void PCallVoidLuaFunction(string functionName, params object[] parms)
     {
         LuaFunction func = m_luaState.GetFunction(functionName);
         if (func == null)
@@ -59,9 +59,21 @@ public class LuaManager : Manager
         func.Dispose();
     }
 
-    public LuaFunction GetLuaFunction(string functionName)
+    public LuaTable PCallTableLuaFunction(string functionName, params object[] parms)
     {
-        return m_luaState.GetFunction(functionName);
+        LuaFunction func = m_luaState.GetFunction(functionName);
+        if (func == null)
+            return null;
+        func.BeginPCall();
+        for (int i = 0; i < parms.Length; ++i)
+        {
+            func.Push(parms[i]);
+        }
+        func.PCall();
+        LuaTable t = func.CheckLuaTable();
+        func.EndPCall();
+        func.Dispose();
+        return t;
     }
 
     protected override void Awake()
