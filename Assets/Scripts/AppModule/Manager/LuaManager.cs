@@ -46,6 +46,8 @@ public class LuaManager : Manager
 
     public void PCallVoidLuaFunction(string functionName, params object[] parms)
     {
+        if (m_luaState == null)
+            return;
         LuaFunction func = m_luaState.GetFunction(functionName);
         if (func == null)
             return;
@@ -61,6 +63,9 @@ public class LuaManager : Manager
 
     public LuaTable PCallTableLuaFunction(string functionName, params object[] parms)
     {
+        if (m_luaState == null)
+            return null;
+
         LuaFunction func = m_luaState.GetFunction(functionName);
         if (func == null)
             return null;

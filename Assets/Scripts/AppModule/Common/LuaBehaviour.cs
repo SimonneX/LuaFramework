@@ -16,10 +16,10 @@ public class LuaBehaviour : ViewComponent
             luaClassName = gameObject.name;
         }
 
-        m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create");
+        m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create", gameObject);
         if (m_currentLuaTable != null)
         {
-            m_currentLuaTable.Call("awake");
+            m_currentLuaTable.Call("awake", m_currentLuaTable);
         }
     }
 
@@ -28,7 +28,7 @@ public class LuaBehaviour : ViewComponent
     {
         if (m_currentLuaTable != null)
         {
-            m_currentLuaTable.Call("start");
+            m_currentLuaTable.Call("start", m_currentLuaTable);
         }
     }
 
@@ -37,14 +37,16 @@ public class LuaBehaviour : ViewComponent
     {
         if (m_currentLuaTable != null)
         {
-            m_currentLuaTable.Call("update");
+            m_currentLuaTable.Call("update", m_currentLuaTable);
         }
     }
     protected virtual void Destroy()
     {
         if (m_currentLuaTable != null)
         {
-            m_currentLuaTable.Call("destroy");
+            m_currentLuaTable.Call("destroy", m_currentLuaTable);
+            m_currentLuaTable.Dispose();
+            m_currentLuaTable = null;
         }
     }
 }

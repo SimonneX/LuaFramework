@@ -1,15 +1,12 @@
 BaseView = Object:extend()
 
-function BaseView:new()
-    print("BaseView:new")
+function BaseView:new(gameObject)
 end
 
 function BaseView:awake()
-    print("BaseView:awake")
 end
 
 function BaseView:start()
-    print("BaseView:start")
 end
 
 function BaseView:update()

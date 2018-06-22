@@ -12,6 +12,7 @@ local function requireFiles()
 	Object = require("app/common/object")
 
 	require("app/controller/command/define")
+	require("app/view/viewComponent/define")
 end
 
 function main()
