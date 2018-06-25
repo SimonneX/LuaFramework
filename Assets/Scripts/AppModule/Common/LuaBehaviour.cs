@@ -22,7 +22,14 @@ public class LuaVariable
 }
 public class LuaBehaviour : ViewComponent
 {
+    /// <summary>
+    /// lua的类名
+    /// 不写默认为GameObject的名字
+    /// </summary>
     public string luaClassName = null;
+    /// <summary>
+    /// 需要注入到lua中的变量
+    /// </summary>
     public LuaVariable[] luaVariableList;
 
     protected LuaTable m_currentLuaTable = null;
