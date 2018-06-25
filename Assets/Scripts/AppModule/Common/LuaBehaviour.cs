@@ -6,6 +6,7 @@ using LuaInterface;
 public class LuaBehaviour : ViewComponent
 {
     public string luaClassName = null;
+    public Dictionary<string, string> luaVariable;
 
     protected LuaTable m_currentLuaTable = null;
 
@@ -17,36 +18,35 @@ public class LuaBehaviour : ViewComponent
         }
 
         m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create", gameObject);
-        if (m_currentLuaTable != null)
-        {
-            m_currentLuaTable.Call("awake", m_currentLuaTable);
-        }
+        CallLuaFunction("awake");
     }
 
     // Use this for initialization
     protected virtual void Start()
     {
-        if (m_currentLuaTable != null)
-        {
-            m_currentLuaTable.Call("start", m_currentLuaTable);
-        }
+        CallLuaFunction("start");
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (m_currentLuaTable != null)
-        {
-            m_currentLuaTable.Call("update", m_currentLuaTable);
-        }
+        CallLuaFunction("update");
     }
     protected virtual void Destroy()
     {
+        CallLuaFunction("destroy");
         if (m_currentLuaTable != null)
         {
-            m_currentLuaTable.Call("destroy", m_currentLuaTable);
             m_currentLuaTable.Dispose();
             m_currentLuaTable = null;
+        }
+    }
+
+    protected virtual void CallLuaFunction(string luaFunctionName)
+    {
+        if (m_currentLuaTable != null)
+        {
+            m_currentLuaTable.Call(luaFunctionName, m_currentLuaTable);
         }
     }
 }
