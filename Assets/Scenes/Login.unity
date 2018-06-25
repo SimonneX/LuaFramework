@@ -1079,7 +1079,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93e6d6e0f0d348fe9063c150e5fbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  luaClassName: 
+  luaClassName: LoginView
+  luaVariableList:
+  - key: varObject
+    type: 3
+    Objectvalue: {fileID: 519420028}
+    intValue: 0
+    stringValue: 
+    floatValue: 0
+  - key: varInt
+    type: 0
+    Objectvalue: {fileID: 0}
+    intValue: 1111
+    stringValue: 
+    floatValue: 0
+  - key: varFloat
+    type: 1
+    Objectvalue: {fileID: 0}
+    intValue: 0
+    stringValue: 
+    floatValue: 1.11
+  - key: varString
+    type: 2
+    Objectvalue: {fileID: 0}
+    intValue: 0
+    stringValue: abc
+    floatValue: 0
 --- !u!222 &1858316752
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -3,10 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
 
+[System.Serializable]
+public class LuaVariable
+{
+    public enum VALUE_TYPE
+    {
+        Int,
+        Float,
+        String,
+        GameObject,
+    }
+    public string key;
+    public VALUE_TYPE type;
+    public GameObject Objectvalue;
+    public int intValue;
+    public string stringValue;
+    public float floatValue;
+}
 public class LuaBehaviour : ViewComponent
 {
     public string luaClassName = null;
-    public Dictionary<string, string> luaVariable;
+    public LuaVariable[] luaVariableList;
 
     protected LuaTable m_currentLuaTable = null;
 
@@ -18,6 +35,8 @@ public class LuaBehaviour : ViewComponent
         }
 
         m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create", gameObject);
+
+        InitLuaVariable();
         CallLuaFunction("awake");
     }
 
@@ -44,9 +63,37 @@ public class LuaBehaviour : ViewComponent
 
     protected virtual void CallLuaFunction(string luaFunctionName)
     {
-        if (m_currentLuaTable != null)
+        if (m_currentLuaTable == null)
+            return;
+
+        m_currentLuaTable.Call(luaFunctionName, m_currentLuaTable);
+    }
+
+    protected virtual void InitLuaVariable()
+    {
+        if (m_currentLuaTable == null)
+            return;
+
+        for (int i = 0; i < luaVariableList.Length; ++i)
         {
-            m_currentLuaTable.Call(luaFunctionName, m_currentLuaTable);
+            LuaVariable.VALUE_TYPE type = luaVariableList[i].type;
+            switch (type)
+            {
+                case LuaVariable.VALUE_TYPE.Int:
+                    m_currentLuaTable.RawSet(luaVariableList[i].key, luaVariableList[i].intValue);
+                    break;
+                case LuaVariable.VALUE_TYPE.String:
+                    m_currentLuaTable.RawSet(luaVariableList[i].key, luaVariableList[i].stringValue);
+                    break;
+                case LuaVariable.VALUE_TYPE.Float:
+                    m_currentLuaTable.RawSet(luaVariableList[i].key, luaVariableList[i].floatValue);
+                    break;
+                case LuaVariable.VALUE_TYPE.GameObject:
+                    m_currentLuaTable.RawSet(luaVariableList[i].key, luaVariableList[i].Objectvalue);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
