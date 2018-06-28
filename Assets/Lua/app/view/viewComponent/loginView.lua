@@ -1,27 +1,25 @@
 LoginView = BaseView:extend()
 
-function LoginView:new(gameObject)
-    self.gameObject = gameObject
-
-    self.varObject = nil
-    self.varInt = nil
-    self.varFloat = nil
-    self.varString = nil
+function LoginView:new()
 end
 
 function LoginView:awake()
     print("" .. self.gameObject.name)
-    print(tostring(self.varObject.name))
-    print(tostring(self.varInt))
-    print(tostring(self.varFloat))
-    print(tostring(self.varString))
+    self.loginButton = self.loginButtonObject:GetComponent("UnityEngine.UI.Button")
+    self.userNameInputField = self.userNameObject:GetComponent("UnityEngine.UI.InputField")
+    self.passwordInputField = self.passwordObject:GetComponent("UnityEngine.UI.InputField")
 end
 
 function LoginView:start()
+    self.manager:AddClick(self.loginButton.gameObject, self.onButtonClick, self)
 end
 
 function LoginView:update()
 end
 
 function LoginView:destroy()
+end
+
+function LoginView:onButtonClick(go)
+    print("LoginInfo >> userName:" .. self.userNameInputField.text .. ",password:" .. self.passwordInputField.text)
 end

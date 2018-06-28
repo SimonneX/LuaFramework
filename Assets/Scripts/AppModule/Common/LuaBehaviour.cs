@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using LuaInterface;
 
 [System.Serializable]
@@ -41,7 +42,7 @@ public class LuaBehaviour : ViewComponent
             luaClassName = gameObject.name;
         }
 
-        m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create", gameObject);
+        m_currentLuaTable = LuaManager.Instance.PCallTableLuaFunction(luaClassName + ".create");
 
         InitLuaVariable();
         CallLuaFunction("awake");
@@ -68,6 +69,22 @@ public class LuaBehaviour : ViewComponent
         }
     }
 
+    public void AddClick(GameObject go, LuaFunction func, LuaTable target = null)
+    {
+        go.GetComponent<Button>().onClick.AddListener(delegate ()
+        {
+            if (target == null)
+            {
+                func.Call(go);
+            }
+            else
+            {
+                func.Call(target, go);
+            }
+
+        });
+    }
+
     protected virtual void CallLuaFunction(string luaFunctionName)
     {
         if (m_currentLuaTable == null)
@@ -81,6 +98,9 @@ public class LuaBehaviour : ViewComponent
         if (m_currentLuaTable == null)
             return;
 
+        m_currentLuaTable.RawSet("gameObject", gameObject);
+        m_currentLuaTable.RawSet("manager", this);
+        // custom variable
         for (int i = 0; i < luaVariableList.Length; ++i)
         {
             LuaVariable.VALUE_TYPE type = luaVariableList[i].type;

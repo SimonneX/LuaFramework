@@ -1,6 +1,6 @@
 BaseView = Object:extend()
 
-function BaseView:new(gameObject)
+function BaseView:new()
 end
 
 function BaseView:awake()

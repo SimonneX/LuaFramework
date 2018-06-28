@@ -154,10 +154,17 @@ public static class CustomSettings
         _GT(typeof(Resources)),
         _GT(typeof(LuaProfiler)),
 
-        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
+        // UGUI
+        _GT(typeof(UnityEngine.UI.Text)),
+        _GT(typeof(UnityEngine.UI.Image)),
+        _GT(typeof(UnityEngine.UI.Button)),
+        _GT(typeof(UnityEngine.UI.InputField)),
 
+        // Custom
+        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
         _GT(typeof(Facade)),
         _GT(typeof(ApplicationFacade)),
+        _GT(typeof(LuaBehaviour)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

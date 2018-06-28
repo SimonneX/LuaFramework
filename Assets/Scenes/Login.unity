@@ -1081,29 +1081,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luaClassName: LoginView
   luaVariableList:
-  - key: varObject
+  - key: loginButtonObject
     type: 3
-    Objectvalue: {fileID: 519420028}
+    Objectvalue: {fileID: 1332411284}
     intValue: 0
     stringValue: 
     floatValue: 0
-  - key: varInt
-    type: 0
-    Objectvalue: {fileID: 0}
-    intValue: 1111
+  - key: userNameObject
+    type: 3
+    Objectvalue: {fileID: 64321404}
+    intValue: 0
     stringValue: 
     floatValue: 0
-  - key: varFloat
-    type: 1
-    Objectvalue: {fileID: 0}
+  - key: passwordObject
+    type: 3
+    Objectvalue: {fileID: 1427422854}
     intValue: 0
     stringValue: 
-    floatValue: 1.11
-  - key: varString
-    type: 2
-    Objectvalue: {fileID: 0}
-    intValue: 0
-    stringValue: abc
     floatValue: 0
 --- !u!222 &1858316752
 CanvasRenderer:
