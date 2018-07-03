@@ -35,6 +35,6 @@ public class GameManager : Manager
         if (!enabledDebugView)
             return;
 
-        Instantiate(Resources.Load("Prefabs/DebugViewCanvas"));
+        Instantiate(ResourcesManager.Instance.GetResourcesObject("Prefabs/Common/DebugViewCanvas"));
     }
 }

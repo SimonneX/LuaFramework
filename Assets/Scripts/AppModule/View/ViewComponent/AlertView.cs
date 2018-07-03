@@ -26,7 +26,7 @@ public class AlertView : MonoBehaviour
     public static void Show(string message)
     {
         ResourcesManager resMgr = ResourcesManager.Instance as ResourcesManager;
-        GameObject alertGo = Instantiate(resMgr.GetResources("Prefabs/UIAlert")) as GameObject;
+        GameObject alertGo = Instantiate(resMgr.GetResourcesObject("Prefabs/UIAlert")) as GameObject;
         GameObject canvas = GameObject.Find("Canvas");
         alertGo.transform.SetParent(canvas.transform);
         alertGo.transform.localPosition = Vector3.zero;
