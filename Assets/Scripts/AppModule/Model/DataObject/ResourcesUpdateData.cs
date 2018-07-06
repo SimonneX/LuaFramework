@@ -16,6 +16,7 @@ public class ResourcesUpdateData : Object
     /// if percent is 1, status will be changed to Finish
     /// </summary>
     public UPDATE_STATUS status = UPDATE_STATUS.NONE;
+    protected float _percent;
     /// <summary>
     /// from 0-1
     /// </summary>
@@ -23,16 +24,16 @@ public class ResourcesUpdateData : Object
     {
         set
         {
-            percent = value;
+            _percent = value;
             if (value >= 1.0f)
             {
-                percent = 1.0f;
+                _percent = 1.0f;
                 status = UPDATE_STATUS.FINISH;
             }
         }
         get
         {
-            return percent;
+            return _percent;
         }
     }
 
