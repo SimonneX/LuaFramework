@@ -8,6 +8,11 @@ public class StartLuaCommand : SimpleCommand
     {
         base.Execute(notification);
 
+        ResourcesUpdateData data = notification.Body as ResourcesUpdateData;
+        if (!data.IsFinish())
+        {
+            return;
+        }
         LuaManager.Instance.Init();
         LuaManager.Instance.StartMain();
     }
