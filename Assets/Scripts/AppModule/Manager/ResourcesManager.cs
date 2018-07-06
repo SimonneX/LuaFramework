@@ -106,15 +106,13 @@ public class ResourcesManager : Manager
                 Debug.LogWarning("Error:" + wd.error);
                 yield break;
             }
-            updateStatusData.percent = (i + 1) / downloadList.Count;
+            updateStatusData.SetPercent((float)(i + 1) / downloadList.Count);
             SendNotification(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, updateStatusData);
-            Debug.Log("percent=" + updateStatusData.percent);
 
             string fullPathFile = Path.Combine(Application.persistentDataPath, Path.GetFileName(fileUrl));
             File.WriteAllBytes(fullPathFile, wd.bytes);
-            Debug.Log("SaveFileTo:" + fullPathFile);
+            Debug.Log("saveFileTo:" + fullPathFile);
         }
-        SendNotification(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, updateStatusData);
         yield return null;
     }
 }

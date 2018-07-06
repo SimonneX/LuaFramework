@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Manager
 {
-    public const string CDN_URL = "127.0.0.1";
+    public const string CDN_URL = "http://127.0.0.1:3000";
     public bool enabledDebugView = false;
     private static GameManager s_instance;
     public static GameManager Instance

@@ -42,7 +42,8 @@ public class ApplicationFacade : Facade
 
         RegisterCommand(NotificationDefine.STARTUP, typeof(StartupCommand));
         RegisterCommand(NotificationDefine.RESOURCES_UPDATE, typeof(ResourcesUpdateCommand));
-        RegisterCommand(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, typeof(ResourcesUpdateFinishCommand));
+        RegisterCommand(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, typeof(ResourcesUpdateStatusCommand));
+        RegisterCommand(NotificationDefine.START_LUA, typeof(StartLuaCommand));
         RegisterCommand(NotificationDefine.SHOW_ALERT_VIEW, typeof(ShowAlertCommand));
     }
 

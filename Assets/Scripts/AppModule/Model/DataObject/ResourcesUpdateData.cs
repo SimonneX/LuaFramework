@@ -16,26 +16,10 @@ public class ResourcesUpdateData : Object
     /// if percent is 1, status will be changed to Finish
     /// </summary>
     public UPDATE_STATUS status = UPDATE_STATUS.NONE;
-    protected float _percent;
     /// <summary>
     /// from 0-1
     /// </summary>
-    public float percent
-    {
-        set
-        {
-            _percent = value;
-            if (value >= 1.0f)
-            {
-                _percent = 1.0f;
-                status = UPDATE_STATUS.FINISH;
-            }
-        }
-        get
-        {
-            return _percent;
-        }
-    }
+    public float percent;
 
     public void Reset()
     {
@@ -51,6 +35,16 @@ public class ResourcesUpdateData : Object
     public ResourcesUpdateData()
     {
         Reset();
+    }
+
+    public void SetPercent(float per)
+    {
+        this.percent = per;
+        if (per >= 1.0f)
+        {
+            this.percent = 1.0f;
+            this.status = UPDATE_STATUS.FINISH;
+        }
     }
 
     public ResourcesUpdateData(UPDATE_STATUS status, float percent)

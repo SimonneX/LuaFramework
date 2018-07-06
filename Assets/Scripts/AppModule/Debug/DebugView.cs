@@ -67,20 +67,6 @@ public class DebugView : MonoBehaviour
 
     IEnumerator StartDownloadFile()
     {
-        for (int i = 0; i < 40; ++i)
-        {
-            WWW wd = new WWW("https://www.baidu.com/img/bd_logo1.png");
-            yield return wd;
-            while (!wd.isDone)
-            {
-                Debug.Log("download:" + wd.progress + "%");
-                yield return null;
-            }
-
-            string fullPathFile = Application.persistentDataPath + "/" + i + ".png";
-            File.WriteAllBytes(fullPathFile, wd.bytes);
-            Debug.Log("SaveFileTo:" + fullPathFile);
-        }
         yield return null;
     }
 }
