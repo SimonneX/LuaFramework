@@ -97,7 +97,7 @@ public class ResourcesManager : Manager
         List<string> downloadList = new List<string> { "StreamingAssets.manifest", "StreamingAssets", "prefabs/common", "prefabs/common.manifest" };
         for (int i = 0; i < downloadList.Count; ++i)
         {
-            string fileUrl = Path.Combine(GameManager.CDN_URL, downloadList[i]);
+            string fileUrl = GameManager.CDN_URL + "/" + downloadList[i];
             Debug.Log("downloadFile:" + fileUrl);
             WWW wd = new WWW(fileUrl);
             yield return wd;
