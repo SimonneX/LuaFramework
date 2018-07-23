@@ -38,7 +38,7 @@ public class ResourcesUpdateMediator : Mediator
 
     override public void HandleNotification(INotification notification)
     {
-        Debug.Log("HandleNotification >> " + notification.Name);
+        // Debug.Log("HandleNotification >> " + notification.Name);
         switch (notification.Name)
         {
             case NotificationDefine.RESOURCES_UPDATE_PERCENT:
