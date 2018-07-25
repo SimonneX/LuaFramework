@@ -32,16 +32,16 @@ public class ResourcesUpdateMediator : Mediator
     {
         return new List<string>
         {
-            NotificationDefine.RESOURCES_UPDATE_PERCENT
+            NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE
         };
     }
 
     override public void HandleNotification(INotification notification)
     {
-        // Debug.Log("HandleNotification >> " + notification.Name);
+
         switch (notification.Name)
         {
-            case NotificationDefine.RESOURCES_UPDATE_PERCENT:
+            case NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE:
                 UpdateResourcesPercent(notification.Body);
                 break;
             default:

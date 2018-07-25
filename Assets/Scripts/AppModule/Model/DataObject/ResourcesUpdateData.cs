@@ -8,17 +8,45 @@ public class ResourcesUpdateData : Object
     {
         NONE,
         DOWNLOADING,
-
+        FINISH,
+        ERROR,
     };
 
+    /// <summary>
+    /// if percent is 1, status will be changed to Finish
+    /// </summary>
     public UPDATE_STATUS status = UPDATE_STATUS.NONE;
-    public float percent = 0;
+    /// <summary>
+    /// from 0-1
+    /// </summary>
+    public float percent;
 
-    public ResourcesUpdateData()
+    public void Reset()
     {
         this.status = UPDATE_STATUS.NONE;
         this.percent = 0;
     }
+
+    public bool IsFinish()
+    {
+        return this.status == UPDATE_STATUS.FINISH;
+    }
+
+    public ResourcesUpdateData()
+    {
+        Reset();
+    }
+
+    public void SetPercent(float per)
+    {
+        this.percent = per;
+        if (per >= 1.0f)
+        {
+            this.percent = 1.0f;
+            this.status = UPDATE_STATUS.FINISH;
+        }
+    }
+
     public ResourcesUpdateData(UPDATE_STATUS status, float percent)
     {
         this.status = status;

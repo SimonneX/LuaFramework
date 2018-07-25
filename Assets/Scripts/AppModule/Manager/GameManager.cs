@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Manager
 {
+    public const string CDN_URL = "http://127.0.0.1:3000";
     public bool enabledDebugView = false;
     private static GameManager s_instance;
     public static GameManager Instance
@@ -25,16 +26,11 @@ public class GameManager : Manager
         ShowDebugView();
     }
 
-    void Update()
-    {
-
-    }
-
     void ShowDebugView()
     {
         if (!enabledDebugView)
             return;
 
-        Instantiate(Resources.Load("Prefabs/DebugViewCanvas"));
+        Instantiate(ResourcesManager.Instance.GetResourcesObject("prefabs/common/DebugViewCanvas"));
     }
 }

@@ -7,8 +7,8 @@ using System.Diagnostics;
 
 public class Packager
 {
-    // 生成的目录
-    public static string BUILD_PATH = Application.dataPath + "/AssetBundles";
+    // 生成AssetBundle的目录
+    public static string BUILD_PATH = Application.streamingAssetsPath;
 
     [MenuItem("Tools/Build iOS Resources", false, 100)]
     public static void BuildiOSResource()
@@ -44,7 +44,9 @@ public class Packager
             Directory.Delete(BUILD_PATH, true);
         }
         Directory.CreateDirectory(BUILD_PATH);
+
         BuildPipeline.BuildAssetBundles(BUILD_PATH, BuildAssetBundleOptions.None, target);
+
         AssetDatabase.Refresh();
     }
 
