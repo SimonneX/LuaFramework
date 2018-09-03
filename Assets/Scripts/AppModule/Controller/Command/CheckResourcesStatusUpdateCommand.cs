@@ -2,7 +2,7 @@ using PureMVC.Interfaces;
 using PureMVC.Patterns;
 using UnityEngine;
 
-public class ResourcesUpdateStatusCommand : SimpleCommand
+public class CheckResourcesStatusUpdateCommand : SimpleCommand
 {
     override public void Execute(INotification notification)
     {
@@ -12,7 +12,8 @@ public class ResourcesUpdateStatusCommand : SimpleCommand
         ResourcesUpdateData data = notification.Body as ResourcesUpdateData;
         if (data.IsFinish())
         {
-            SendNotification(NotificationDefine.START_LUA);
+            LuaManager.Instance.Init();
+            LuaManager.Instance.StartMain();
         }
     }
 }

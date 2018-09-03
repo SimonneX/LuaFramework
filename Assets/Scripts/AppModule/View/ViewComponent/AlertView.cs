@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class AlertView : MonoBehaviour
 {
+    protected const string PREFAB_RES_PATH = "static/UIAlert";
     public Text alertText;
     public Image bgImage;
 
@@ -21,14 +22,18 @@ public class AlertView : MonoBehaviour
         }
     }
 
-    private bool isShow = false;
-
     public static void Show(string message)
     {
-        ResourcesManager resMgr = ResourcesManager.Instance as ResourcesManager;
-        GameObject alertGo = Instantiate(resMgr.GetResourcesObject("prefabs/common/UIAlert")) as GameObject;
-        GameObject canvas = GameObject.Find("Canvas");
-        alertGo.transform.SetParent(canvas.transform);
+        ResourcesManager resMgr = ResourcesManager.Instance;
+        GameObject alertGo = Instantiate(resMgr.GetResourcesObject<GameObject>(PREFAB_RES_PATH)) as GameObject;
+        GameObject canvasObj = GameObject.Find("Canvas");
+        if (canvasObj == null)
+        {
+            Debug.LogWarning("AlertView >> Cant find Canvas Object");
+            return;
+        }
+
+        alertGo.transform.SetParent(canvasObj.transform);
         alertGo.transform.localPosition = Vector3.zero;
 
         AlertView view = alertGo.GetComponent<AlertView>();

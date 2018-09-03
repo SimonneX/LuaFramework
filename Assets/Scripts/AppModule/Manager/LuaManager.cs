@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
+using System.IO;
 
-public class LuaManager : Manager
+public class LuaManager : Manager<LuaManager>
 {
-
-    private static LuaManager s_instance;
-    public static LuaManager Instance
-    {
-        get
-        {
-            return s_instance;
-        }
-    }
+    public const string LuaPath = "Lua";
+    public const string ToLuaPath = "Lua/ToLua";
     private LuaState m_luaState = null;
     private LuaResLoader m_luaResLoader = null;
     // Use this for initialization
@@ -22,11 +16,9 @@ public class LuaManager : Manager
     {
         m_luaResLoader = new LuaResLoader();
         m_luaState = new LuaState();
-        m_luaState.Start();
-
-        LuaBinder.Bind(m_luaState);
-
         InitLuaPath();
+        m_luaState.Start();
+        LuaBinder.Bind(m_luaState);
     }
 
     public void StartMain()
@@ -81,28 +73,42 @@ public class LuaManager : Manager
         return t;
     }
 
+    public bool AddSearchPath(string searchPath)
+    {
+        return LuaFileUtils.Instance.AddSearchPath(searchPath);
+    }
+
+    public bool RemoveSearchPath(string searchPath)
+    {
+        return LuaFileUtils.Instance.RemoveSearchPath(searchPath);
+    }
+
     protected override void Awake()
     {
         base.Awake();
         s_instance = this;
     }
 
-    void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (m_luaState != null)
         {
             m_luaState.CheckTop();
         }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (m_luaState != null)
         {
             m_luaState.Dispose();
@@ -117,6 +123,13 @@ public class LuaManager : Manager
             Debug.LogWarning("LuaManager >> InitLuaPath >> m_luaState is null");
             return;
         }
-        m_luaState.AddSearchPath(Application.dataPath + "/Lua");
+
+#if UNITY_EDITOR
+        m_luaState.AddSearchPath(Path.Combine(Application.dataPath, LuaPath));
+#endif
+        m_luaState.AddSearchPath(Path.Combine(Application.persistentDataPath, LuaPath));
+        m_luaState.AddSearchPath(Path.Combine(Application.persistentDataPath, ToLuaPath));
+        m_luaState.AddSearchPath(Path.Combine(Application.streamingAssetsPath, LuaPath));
+        m_luaState.AddSearchPath(Path.Combine(Application.streamingAssetsPath, ToLuaPath));
     }
 }

@@ -52,6 +52,6 @@ public class ResourcesUpdateMediator : Mediator
     protected void UpdateResourcesPercent(object data)
     {
         ResourcesUpdateData statusData = data as ResourcesUpdateData;
-        updateView.UpdatePercent(statusData.percent);
+        updateView.UpdateView(statusData);
     }
 }

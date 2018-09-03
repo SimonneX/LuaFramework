@@ -40,10 +40,13 @@ public class ApplicationFacade : Facade
     {
         base.InitializeController();
 
+        // 游戏启动
         RegisterCommand(NotificationDefine.STARTUP, typeof(StartupCommand));
-        RegisterCommand(NotificationDefine.RESOURCES_UPDATE, typeof(ResourcesUpdateCommand));
-        RegisterCommand(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, typeof(ResourcesUpdateStatusCommand));
-        RegisterCommand(NotificationDefine.START_LUA, typeof(StartLuaCommand));
+        // 热更启动
+        RegisterCommand(NotificationDefine.START_RESOURCES_UPDATE, typeof(StartResourcesUpdateCommand));
+        // 热更完成
+        RegisterCommand(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, typeof(CheckResourcesStatusUpdateCommand));
+
         RegisterCommand(NotificationDefine.SHOW_ALERT_VIEW, typeof(ShowAlertCommand));
     }
 

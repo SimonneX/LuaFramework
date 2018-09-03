@@ -21,10 +21,13 @@ public class ResourcesUpdateData : Object
     /// </summary>
     public float percent;
 
+    public float speed;
+
     public void Reset()
     {
         this.status = UPDATE_STATUS.NONE;
         this.percent = 0;
+        this.speed = 0;
     }
 
     public bool IsFinish()
@@ -45,6 +48,11 @@ public class ResourcesUpdateData : Object
             this.percent = 1.0f;
             this.status = UPDATE_STATUS.FINISH;
         }
+    }
+
+    public void SetSpeed(float s)
+    {
+        this.speed = s;
     }
 
     public ResourcesUpdateData(UPDATE_STATUS status, float percent)
