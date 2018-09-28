@@ -1,12 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class AlertView : MonoBehaviour
 {
-    protected const string PREFAB_RES_PATH = "static/UIAlert";
+    protected const string PREFAB_RES_PATH = "AlertView";
+
+    public Button okButton;
     public Text alertText;
     public Image bgImage;
 
@@ -22,21 +25,19 @@ public class AlertView : MonoBehaviour
         }
     }
 
-    public static void Show(string message)
+    public delegate void SimpleClickDelegate();
+
+    protected SimpleClickDelegate m_clickDel;
+
+    public static void Show(string message, SimpleClickDelegate okDel = null)
     {
-        ResourcesManager resMgr = ResourcesManager.Instance;
-        GameObject alertGo = Instantiate(resMgr.GetResourcesObject<GameObject>(PREFAB_RES_PATH)) as GameObject;
-        GameObject canvasObj = GameObject.Find("Canvas");
-        if (canvasObj == null)
+        GameObject alertGo = UIUtils.ShowUIViewWithinStatic(PREFAB_RES_PATH);
+        if (alertGo == null)
         {
-            Debug.LogWarning("AlertView >> Cant find Canvas Object");
             return;
         }
-
-        alertGo.transform.SetParent(canvasObj.transform);
-        alertGo.transform.localPosition = Vector3.zero;
-
         AlertView view = alertGo.GetComponent<AlertView>();
+        view.SetClickDelegate(okDel);
         view.Message = message;
     }
 
@@ -52,11 +53,28 @@ public class AlertView : MonoBehaviour
 
     }
 
+    public void SetClickDelegate(SimpleClickDelegate del)
+    {
+        m_clickDel = del;
+    }
+
+    public void OnClickOkButton()
+    {
+        if (m_clickDel != null)
+        {
+            m_clickDel();
+        }
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        m_clickDel = null;
+    }
+
     void ShowAnimation()
     {
-        float interval = 1.0f;
-        bgImage.DOFade(0, interval);
-        alertText.DOFade(0, interval);
-        transform.DOLocalMoveY(300, interval + 0.1f).onComplete = () => { Destroy(gameObject); };
+        gameObject.transform.localScale = 0.4f * Vector3.one;
+        gameObject.transform.DOScale(1.0f, 0.3f);
     }
 }

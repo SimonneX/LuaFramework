@@ -91,6 +91,21 @@ public class FileDownloader : MonoBehaviour
     }
     protected float m_downloadedFileSize = 0.0f;
 
+    protected int m_retrytimes = 3;
+
+    public int retryTimes
+    {
+        get
+        {
+            return m_retrytimes;
+        }
+        set
+        {
+            m_retrytimes = value;
+        }
+    }
+    protected int m_currentRetryTimes = 0;
+
     protected UnityWebRequest m_uwr = null;
 
     /// <summary>
@@ -179,6 +194,7 @@ public class FileDownloader : MonoBehaviour
     void ChangeStateTo(DownloadState st)
     {
         state = st;
+        Debug.Log("ChangeStateTo:" + st.ToString());
         switch (state)
         {
             case DownloadState.None:
@@ -239,22 +255,33 @@ public class FileDownloader : MonoBehaviour
             m_uwr.timeout = m_timeout;
             yield return m_uwr.SendWebRequest();
 
-            if (m_uwr.isNetworkError)
+            if (m_uwr.isNetworkError || m_uwr.isHttpError)
             {
-                file.ChangeStateTo(DownloadState.NetworkError);
-                ChangeStateTo(DownloadState.NetworkError);
-                yield return null;
-            }
+                if (m_currentRetryTimes < m_retrytimes)
+                {
+                    ++m_currentRetryTimes;
+                    Debug.Log("retry_time:" + m_currentRetryTimes);
+                    continue;
+                }
+                m_currentRetryTimes = 0;
+                if (m_uwr.isNetworkError)
+                {
+                    file.ChangeStateTo(DownloadState.NetworkError);
+                    ChangeStateTo(DownloadState.NetworkError);
+                    break;
+                }
 
-            if (m_uwr.isHttpError)
-            {
-                file.ChangeStateTo(DownloadState.HttpError);
-                ChangeStateTo(DownloadState.HttpError);
-                yield return null;
+                if (m_uwr.isHttpError)
+                {
+                    file.ChangeStateTo(DownloadState.HttpError);
+                    ChangeStateTo(DownloadState.HttpError);
+                    break;
+                }
             }
 
             if (m_uwr.isDone)
             {
+                m_currentRetryTimes = 0;
                 file.state = DownloadState.Finish;
                 m_downloadedFileSize += (m_uwr.downloadedBytes / 1024);
                 if (onFileDownloadFinish != null)

@@ -46,8 +46,6 @@ public class ApplicationFacade : Facade
         RegisterCommand(NotificationDefine.START_RESOURCES_UPDATE, typeof(StartResourcesUpdateCommand));
         // 热更完成
         RegisterCommand(NotificationDefine.CHECK_RESOURCES_STATUS_UPDATE, typeof(CheckResourcesStatusUpdateCommand));
-
-        RegisterCommand(NotificationDefine.SHOW_ALERT_VIEW, typeof(ShowAlertCommand));
     }
 
     public void RegisterLuaCommand(string notificationName)

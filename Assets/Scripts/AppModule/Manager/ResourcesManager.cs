@@ -184,17 +184,23 @@ public class ResourcesManager : Manager<ResourcesManager>
             List<DownloadFile> list = new List<DownloadFile>();
             // list.Add(new DownloadFile("https://speed.hetzner.de/100MB.bin", Path.Combine(Application.persistentDataPath, "test1.bin")));
             list.Add(new DownloadFile("https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=https%3A%2F%2Ftimgsa.baidu.com%2Ftimg%3Fimage%26quality%3D80%26size%3Db9999_10000%26sec%3D1535005781611%26di%3Decfa16c783fec6a3eee60d0cb4eee654%26imgtype%3D0%26src%3Dhttp%253A%252F%252Fatt.bbs.duowan.com%252Fforum%252F201209%252F28%252F075324wcewb8zwgb1pgbg0.jpg&thumburl=https%3A%2F%2Fss1.bdstatic.com%2F70cFvXSh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D3206931758%2C4276788165%26fm%3D26%26gp%3D0.jpg", Path.Combine(Application.persistentDataPath, "test.jpg")));
+            list.Add(new DownloadFile("192.168.1.1/fsdf.jpg", Path.Combine(Application.persistentDataPath, "test1.jpg")));
 
             FileDownloader downloader = FileDownloader.DownloadFiles(list);
+            downloader.timeout = 10;
             downloader.onDownloadStateChanged = (FileDownloader dl, DownloadState state) =>
             {
                 if (state == DownloadState.NetworkError)
                 {
-                    ApplicationFacade.Instance.SendNotification(NotificationDefine.SHOW_ALERT_VIEW, new AlertViewData(dl.error));
+                    AlertView.Show(dl.error, () =>
+                    {
+                        Debug.Log("OnCliCked");
+                        downloader.Resume();
+                    });
                 }
                 else if (state == DownloadState.HttpError)
                 {
-                    ApplicationFacade.Instance.SendNotification(NotificationDefine.SHOW_ALERT_VIEW, new AlertViewData("responseCode:" + dl.responseCode));
+                    AlertView.Show("responseCode:" + dl.responseCode);
                 }
                 else if (state == DownloadState.Finish)
                 {
