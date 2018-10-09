@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class AlertView : MonoBehaviour
 {
-    protected const string PREFAB_RES_PATH = "AlertView";
+    protected const string PREFAB_RES_PATH = "static/AlertView";
 
     public Button okButton;
     public Text alertText;
@@ -31,7 +31,7 @@ public class AlertView : MonoBehaviour
 
     public static void Show(string message, SimpleClickDelegate okDel = null)
     {
-        GameObject alertGo = UIUtils.ShowUIViewWithinStatic(PREFAB_RES_PATH);
+        GameObject alertGo = UIUtils.ShowUIView(PREFAB_RES_PATH);
         if (alertGo == null)
         {
             return;

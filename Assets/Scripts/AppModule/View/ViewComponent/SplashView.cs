@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class SplashView : ViewComponent
 {
-    public const string PREFAB_PATH = "ui/SplashView";
+    public const string PREFAB_PATH = "ui/splash/SplashView";
     public const string EVENT_SPLASH_FINISH = "EVENT_SPLASH_FINISH";
 
     public Text splashText;

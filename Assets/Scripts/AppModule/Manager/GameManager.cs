@@ -31,7 +31,7 @@ public class GameManager : Manager<GameManager>
         // 调试界面只在development下打开
         if (Debug.isDebugBuild)
         {
-            UIUtils.InstantiateGameObject(Path.Combine(UIUtils.STAIC_PREFAB_PREFIX_PATH, DebugView.PREFAB_PATH));
+            UIUtils.InstantiateGameObject(DebugView.PREFAB_PATH);
         }
     }
 }

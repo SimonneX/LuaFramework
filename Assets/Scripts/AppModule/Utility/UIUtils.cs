@@ -14,28 +14,6 @@ using UnityEngine.UI;
 public class UIUtils
 {
     public const string UICANVAS_NAME = "UICanvas";
-    public const string PREFAB_PREFIX_PATH = "prefabs";
-    public const string STAIC_PREFAB_PREFIX_PATH = "static";
-
-    /// <summary>
-    /// 显示相对路径为prefabs下的UI
-    /// </summary>
-    /// <param name="prefabRelativePath">相对路径为prefabs下</param>
-    /// <returns></returns>
-    public static GameObject ShowUIViewWithinPrefabs(string prefabRelativePath)
-    {
-        return UIUtils.ShowUIView(Path.Combine(UIUtils.PREFAB_PREFIX_PATH, prefabRelativePath));
-    }
-
-    /// <summary>
-    /// 显示相对路径为prefabs下的UI
-    /// </summary>
-    /// <param name="prefabrelativePath">相对路径为static下</param>
-    /// <returns></returns>
-    public static GameObject ShowUIViewWithinStatic(string prefabrelativePath)
-    {
-        return UIUtils.ShowUIView(Path.Combine(UIUtils.STAIC_PREFAB_PREFIX_PATH, prefabrelativePath));
-    }
 
     /// <summary>
     /// 显示UI界面

@@ -16,6 +16,6 @@ public class StartupCommand : SimpleCommand
         ResourcesManager.Instance.AddSearchPath(Application.persistentDataPath);
         ResourcesManager.Instance.AddSearchPath(Application.streamingAssetsPath);
 
-        UIUtils.ShowUIViewWithinPrefabs(SplashView.PREFAB_PATH);
+        UIUtils.ShowUIView(SplashView.PREFAB_PATH);
     }
 }

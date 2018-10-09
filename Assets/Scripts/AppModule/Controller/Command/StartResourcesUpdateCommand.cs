@@ -17,7 +17,7 @@ public class StartResourcesUpdateCommand : SimpleCommand
     {
         if (scene.name == "ResourcesUpdate")
         {
-            UIUtils.ShowUIViewWithinPrefabs(ResourcesUpdateView.PREFAB_PATH);
+            UIUtils.ShowUIView(ResourcesUpdateView.PREFAB_PATH);
             ResourcesManager.Instance.CheckResources();
 
             SceneManager.sceneLoaded -= OnSceneLoaded;

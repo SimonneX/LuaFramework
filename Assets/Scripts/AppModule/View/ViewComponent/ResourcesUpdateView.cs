@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class ResourcesUpdateView : ViewComponent
 {
-    public const string PREFAB_PATH = "ui/ResourcesUpdateView";
+    public const string PREFAB_PATH = "ui/resourcesUpdate/ResourcesUpdateView";
     public Text valueText;
     public Text tipsText;
     public Text speedText;
