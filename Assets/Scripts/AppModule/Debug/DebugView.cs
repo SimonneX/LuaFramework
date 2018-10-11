@@ -6,6 +6,7 @@ using System.IO;
 
 public class DebugView : MonoBehaviour
 {
+    public const string PREFAB_PATH = "static/DebugViewCanvas";
     public GameObject debugPanel;
     public Toggle showToggle;
 

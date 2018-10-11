@@ -12,17 +12,10 @@ public class StartupCommand : SimpleCommand
         // DOTween
         DOTween.Init();
 
-        // Manager
-        GameObject managerObj = GameObject.Find("Manager");
-        if (managerObj)
-        {
-            managerObj.AddComponent<LuaManager>();
-            managerObj.AddComponent<ResourcesManager>();
-        }
-        else
-        {
-            Debug.LogWarning("StartupCommand >> Execute >> GameObject: Manager not found");
-        }
+        // search path
+        ResourcesManager.Instance.AddSearchPath(Application.persistentDataPath);
+        ResourcesManager.Instance.AddSearchPath(Application.streamingAssetsPath);
 
+        UIUtils.ShowUIView(SplashView.PREFAB_PATH);
     }
 }

@@ -48,6 +48,6 @@ public class SplashMediator : Mediator
 
     protected void OnSplashFinishEvent(Object obj)
     {
-        SendNotification(NotificationDefine.RESOURCES_UPDATE);
+        SendNotification(NotificationDefine.START_RESOURCES_UPDATE);
     }
 }

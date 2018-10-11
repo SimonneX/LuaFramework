@@ -1,36 +1,37 @@
-﻿using System.Collections;
+﻿/*
+ * @Author: simonne.xu 
+ * @Date: 2018-08-10 16:50:22 
+ * @Last Modified by: simonne.xu
+ * @Last Modified time: 2018-08-13 15:40:08
+ * @Description: 管理游戏相关的逻辑
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
-public class GameManager : Manager
+public class GameManager : Manager<GameManager>
 {
     public const string CDN_URL = "http://127.0.0.1:3000";
-    public bool enabledDebugView = false;
-    private static GameManager s_instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            return s_instance;
-        }
-    }
 
     protected override void Awake()
     {
         base.Awake();
+
         s_instance = this;
     }
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
+        // 开始游戏入口
         ApplicationFacade.Instance.StartUp();
-        ShowDebugView();
-    }
 
-    void ShowDebugView()
-    {
-        if (!enabledDebugView)
-            return;
-
-        Instantiate(ResourcesManager.Instance.GetResourcesObject("prefabs/common/DebugViewCanvas"));
+        // 调试界面只在development下打开
+        if (Debug.isDebugBuild)
+        {
+            UIUtils.InstantiateGameObject(DebugView.PREFAB_PATH);
+        }
     }
 }
